@@ -10,10 +10,11 @@ services:
       - "8000:80"
     volumes:
       - .:/var/www/html
-    
+    depends_on:
+      - redis
+
   redis:
     image: redis:alpine
     container_name: redis
     ports:
       - "6379:6379"
-
