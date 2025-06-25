@@ -11,7 +11,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+         $this->app->bind(
+            \App\Interfaces\JWTAuthRepositoryInterface::class,
+            \App\Repositories\JWTAuthRepository::class
+        );
     }
 
     /**
