@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -19,12 +20,8 @@ class JWTAuthRepository implements \App\Interfaces\JWTAuthRepositoryInterface
         $token = JWTAuth::fromUser($user);
 
         return [
-            'status' => true,
-            'message' => 'User registered successfully',
-            'data' => [
-                'user' => $user,
-                'token' => $token
-            ]
+            'user' => $user,
+            'token' => $token
         ];
     }
 
@@ -33,6 +30,7 @@ class JWTAuthRepository implements \App\Interfaces\JWTAuthRepositoryInterface
         if (!$token = JWTAuth::attempt($credentials)) {
             return false;
         }
+        Log::info('Login success for: ' . $credentials['email']);
         return $token;
     }
 

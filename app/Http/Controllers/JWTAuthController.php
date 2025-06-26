@@ -1,47 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
 use Illuminate\Http\Request;
 use App\Services\JWTAuthService;
+use App\Http\Requests\RegisterRequest;
+use App\Traits\ApiResponse;
 
 class JWTAuthController extends Controller
 {
     protected $authService;
+    use ApiResponse;
 
     public function __construct(JWTAuthService $authService)
     {
         $this->authService = $authService;
     }
 
-    public function register(Request $request)
-    {   
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-        ]);
+    public function register(RegisterRequest $request)
+    { 
         $user = $this->authService->registerUser($request->all());
-        return response()->json($user, 201);
+        return $this->successResponse('User registered successfully.', $user, 201);
     }
 
     public function login(Request $request)
     {
         $token = $this->authService->loginUser($request->only('email', 'password'));
         return $token
-            ? response()->json(['status' => true,'token' => $token])
-            : response()->json(['error' => 'Unauthorized'], 401);
+            ? $this->successResponse('Login successful.', ['token' => $token])
+            : $this->errorResponse('Invalid credentials', 401);
     }
 
     public function logout()
     {
         $this->authService->logoutUser();
-        return response()->json(['status' => true,'message' => 'User logged out']);
+        return $this->successResponse('User logged out', 201);
     }
 
     public function me()
-    {
-        return response()->json(['status' => true,"user" =>$this->authService->getUserDetails()]);
+    {   
+        return $this->successResponse('User logged in',$this->authService->getUserDetails(), 201);
     }
 }
