@@ -26,8 +26,10 @@ class JWTAuthRepository implements \App\Interfaces\JWTAuthRepositoryInterface
     }
 
     public function login(array $credentials)
-    {
+    {   
+        Log::info('Login attempt by email: ' . $credentials['email']);
         if (!$token = JWTAuth::attempt($credentials)) {
+            Log::warning('Login failed for email: ' . $credentials['email']);
             return false;
         }
         Log::info('Login success for: ' . $credentials['email']);

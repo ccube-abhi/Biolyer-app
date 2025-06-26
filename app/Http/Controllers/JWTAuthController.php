@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use App\Services\JWTAuthService;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
 use App\Traits\ApiResponse;
 
 class JWTAuthController extends Controller
@@ -18,26 +20,26 @@ class JWTAuthController extends Controller
 
     public function register(RegisterRequest $request)
     { 
-        $user = $this->authService->registerUser($request->all());
-        return $this->successResponse('User registered successfully.', $user, 201);
+        $user = $this->authService->registerUser($request->validated());
+        return $this->successResponse(__('messages.register_success'), $user, Response::HTTP_CREATED);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $token = $this->authService->loginUser($request->only('email', 'password'));
+        $token = $this->authService->loginUser($request->validated());
         return $token
-            ? $this->successResponse('Login successful.', ['token' => $token])
-            : $this->errorResponse('Invalid credentials', 401);
+            ? $this->successResponse(__('messages.login_success'), ['token' => $token])
+            : $this->errorResponse(__('messages.login_error'), Response::HTTP_UNAUTHORIZED);
     }
 
     public function logout()
     {
         $this->authService->logoutUser();
-        return $this->successResponse('User logged out', 201);
+        return $this->successResponse(__('messages.logout_success'), Response::HTTP_OK);
     }
 
     public function me()
     {   
-        return $this->successResponse('User logged in',$this->authService->getUserDetails(), 201);
+        return $this->successResponse(__('messages.login_success'),$this->authService->getUserDetails(), Response::HTTP_OK);
     }
 }
