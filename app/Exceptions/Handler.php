@@ -91,7 +91,7 @@ class Handler extends ExceptionHandler
         // Fallback for all other exceptions
         return response()->json([
             'status' => 'error',
-            'message' => $exception->getMessage() ?: 'Something went wrong'
+            'message' => $exception->getMessage() ? $exception->getMessage() : 'Something went wrong'
         ], method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500);
     }
 }
