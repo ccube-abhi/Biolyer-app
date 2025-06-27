@@ -14,7 +14,7 @@ class JWTAuthRepository implements \App\Interfaces\JWTAuthRepositoryInterface
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => \Hash::make($data['password']),
+            'password' => Hash::make($data['password']),
         ]);
 
         $token = JWTAuth::fromUser($user);
