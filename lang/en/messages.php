@@ -7,5 +7,6 @@ return [
     'login_error' => 'Invalid credentials',
     'logout_success' => 'User logged out',
     'success' => 'success',
-    'error' => 'false'
+    'error' => 'false',
+    'token_error' => 'Token not valid'
 ];
