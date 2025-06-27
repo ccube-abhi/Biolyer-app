@@ -23,7 +23,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-        App::setLocale(request()->header('Accept-Language', 'en'));
+        $acceptLang = request()->server('HTTP_ACCEPT_LANGUAGE'); 
+        $locale = substr($acceptLang, 0, 2); 
+        
+        if (in_array($locale, ['en', 'fr', 'es'])) { 
+            App::setLocale($locale);
+        } else {
+            App::setLocale('en'); 
+        }
     }
 }
