@@ -41,11 +41,10 @@ docker-compose exec app php artisan jwt:secret
 echo "🧱 Running database migrations..."
 docker-compose exec app php artisan migrate
 
-# Optional: Run seeders
-# echo "🌱 Running database seeders..."
-# docker-compose exec app php artisan db:seed
+# Step 10: Run migrations
+docker-compose exec app php artisan db:seed
 
-# Step 10: Clear cache
+# Step 11: Clear cache
 echo "🧹 Clearing config and route cache..."
 docker-compose exec app php artisan config:clear
 docker-compose exec app php artisan cache:clear
