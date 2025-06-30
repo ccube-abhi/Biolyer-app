@@ -67,7 +67,7 @@ php artisan serve
 
 # Step 13: Test it
 Method: GET
-URL: http://127.0.0.1:8000/redis-test
+URL: http://localhost:8000/redis-test
 
 Method:POST
 http://localhost:8000/api/register
