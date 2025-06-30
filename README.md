@@ -51,3 +51,27 @@ php artisan cache:clear
 php artisan route:clear
 
 echo "✅ Laravel setup completed successfully!"
+php artisan serve
+
+----------------------------------------------------
+# Step 1: Setup Redis 
+Add this into your .env file
+
+FCACHE_DRIVER=redis
+SESSION_DRIVER=redis
+QUEUE_CONNECTION=redis
+
+REDIS_CLIENT=phpredis
+REDIS_HOST=redis-test
+REDIS_PORT=6379
+
+"⚠️ Set REDIS_HOST=redis-test to match your container name in docker-compose.yml"
+
+# Step 2: Start composer
+docker compose build web
+docker compose up -d
+
+# Step 2: Test it
+Method: GET
+URL: http://127.0.0.1:8000/redis-test
+
