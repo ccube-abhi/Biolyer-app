@@ -70,8 +70,22 @@ REDIS_PORT=6379
 # Step 2: Start composer
 docker compose build web
 docker compose up -d
+docker compose up -d --build
 
 # Step 2: Test it
 Method: GET
 URL: http://127.0.0.1:8000/redis-test
+
+
+-------------------------------------------------
+Using the Larastan library for testing and error checking
+
+# Step 1: Intro, Installation and Common Errors
+It shows you potential errors in your code with just one terminal command! Or even better - right in your editor. Let's look at what it brings
+
+list is to run the analysis. To do that, run the following command:
+./vendor/bin/phpstan analyse folder-name
+
+More info: https://medium.com/@chirag.dave/how-to-get-your-laravel-app-from-0-to-9-with-larastan-5eb70da6e62e
+-----------------------------------------------------
 
