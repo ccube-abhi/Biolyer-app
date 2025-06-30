@@ -24,30 +24,30 @@ Click Docker icon in your macOS menu bar.
 Go to Preferences (or Settings)
 Navigate to Resources → File Sharing.
 Add this path: /Applications/XAMPP/xamppfiles/htdocs/...
-docker-compose up -d
+docker compose up -d
 
 # Step 6: Generate Laravel application key
 echo "🔑 Generating Laravel app key..."
-docker-compose exec app php artisan key:generate
+php artisan key:generate
 
 # Step 7: Create MySQL database manually if not exists
 echo "🛠️  Ensure the database 'bio-tem' exists (create via MySQL CLI, Adminer, PhpMyAdmin, etc.)"
 
 # Step 8: Set JWT secret
 echo "🔐 Generating JWT secret..."
-docker-compose exec app php artisan jwt:secret
+php artisan jwt:secret
 
 # Step 9: Run migrations
 echo "🧱 Running database migrations..."
-docker-compose exec app php artisan migrate
+php artisan migrate
 
 # Step 10: Run migrations
-docker-compose exec app php artisan db:seed
+php artisan db:seed
 
 # Step 11: Clear cache
 echo "🧹 Clearing config and route cache..."
-docker-compose exec app php artisan config:clear
-docker-compose exec app php artisan cache:clear
-docker-compose exec app php artisan route:clear
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
 
 echo "✅ Laravel setup completed successfully!"
