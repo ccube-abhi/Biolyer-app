@@ -17,34 +17,46 @@ cp .env.example .env
 
 # Step 4: Update .env for MySQL & Redis (manual or edit below if needed)
 echo "⚙️  Ensure .env is configured for Docker MySQL and Redis"
+DB_CONNECTION=mysql
+DB_HOST=host.docker.internal
+DB_PORT=3306
+DB_DATABASE=db_name
+DB_USERNAME=username
+DB_PASSWORD=password
 
-# Step 5: Start Docker containers
+# Step 5: Generate Laravel application key
+echo "🔑 Generating Laravel app key..."
+php artisan key:generate
+
+# Step 6: Set JWT secret
+echo "🔐 Generating JWT secret..."
+php artisan jwt:secret
+
+# Step 7: Setup Redis 
+Add this into your .env file
+REDIS_CLIENT=phpredis
+REDIS_HOST=host_name     //redis-test
+REDIS_PORT=6379
+"⚠️ Set REDIS_HOST=redis-test to match your container name in docker-compose.yml"
+
+# Step 8: Start Docker containers
 echo "🐳 Starting Docker containers..."
 Click Docker icon in your macOS menu bar.
 Go to Preferences (or Settings)
 Navigate to Resources → File Sharing.
 Add this path: /Applications/XAMPP/xamppfiles/htdocs/...
-docker compose up -d
 
-# Step 6: Generate Laravel application key
-echo "🔑 Generating Laravel app key..."
-php artisan key:generate
-
-# Step 7: Create MySQL database manually if not exists
-echo "🛠️  Ensure the database 'bio-tem' exists (create via MySQL CLI, Adminer, PhpMyAdmin, etc.)"
-
-# Step 8: Set JWT secret
-echo "🔐 Generating JWT secret..."
-php artisan jwt:secret
-
-# Step 9: Run migrations
-echo "🧱 Running database migrations..."
-php artisan migrate
+# Step 9: Start composer
+docker compose up -d --build
 
 # Step 10: Run migrations
-php artisan db:seed
+echo "🧱 Running database migrations..."
+docker compose exec web php artisan migrate
 
-# Step 11: Clear cache
+# Step 11: Run migrations
+docker compose exec web php artisan db:seed
+
+# Step 12: Clear cache
 echo "🧹 Clearing config and route cache..."
 php artisan config:clear
 php artisan cache:clear
@@ -53,31 +65,15 @@ php artisan route:clear
 echo "✅ Laravel setup completed successfully!"
 php artisan serve
 
-----------------------------------------------------
-# Step 1: Setup Redis 
-Add this into your .env file
-
-FCACHE_DRIVER=redis
-SESSION_DRIVER=redis
-QUEUE_CONNECTION=redis
-
-REDIS_CLIENT=phpredis
-REDIS_HOST=redis-test
-REDIS_PORT=6379
-
-"⚠️ Set REDIS_HOST=redis-test to match your container name in docker-compose.yml"
-
-# Step 2: Start composer
-docker compose build web
-docker compose up -d
-docker compose up -d --build
-
-# Step 2: Test it
+# Step 13: Test it
 Method: GET
 URL: http://127.0.0.1:8000/redis-test
 
+Method:POST
+http://localhost:8000/api/register
 
 -------------------------------------------------
+
 Using the Larastan library for testing and error checking
 
 # Step 1: Intro, Installation and Common Errors
