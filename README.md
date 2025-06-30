@@ -9,7 +9,7 @@ cd Biolyer-app || exit
 
 # Step 2: Install PHP dependencies
 echo "📦 Installing composer dependencies..."
-composer install || docker-compose exec app composer install
+composer install 
 
 # Step 3: Copy .env file
 echo "📄 Copying .env.example to .env..."
