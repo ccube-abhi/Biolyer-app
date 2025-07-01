@@ -38,3 +38,9 @@ RUN composer install --no-scripts --no-dev
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# NOTE:
+# - Laravel and Redis run inside Docker container
+# - MySQL is hosted on your local machine (XAMPP/MAMP)
+# - In .env, use: DB_HOST=host.docker.internal
+# - If you run `php artisan serve` manually on your Mac, it uses host PHP/XAMPP, not Docker
