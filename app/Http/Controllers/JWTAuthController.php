@@ -19,14 +19,16 @@ class JWTAuthController extends Controller
     }
 
     public function register(RegisterRequest $request)
-    { 
-        $user = $this->authService->registerUser($request->validated());
+    {
+        $validate = $request->validated();
+        $user = $this->authService->registerUser($request->safeParam());
         return $this->successResponse(__('messages.register_success'), $user, Response::HTTP_CREATED);
     }
 
     public function login(LoginRequest $request)
     {
-        $token = $this->authService->loginUser($request->validated());
+        $validate = $request->validated();
+        $token = $this->authService->loginUser($request->safeParam());
         return $token
             ? $this->successResponse(__('messages.login_success'), ['token' => $token])
             : $this->errorResponse(__('messages.login_error'), Response::HTTP_UNAUTHORIZED);
@@ -39,7 +41,7 @@ class JWTAuthController extends Controller
     }
 
     public function me()
-    {   
+    {
         return $this->successResponse(__('messages.login_success'),$this->authService->getUserDetails(), Response::HTTP_OK);
     }
 }
