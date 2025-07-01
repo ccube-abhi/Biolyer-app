@@ -72,6 +72,8 @@ URL: http://localhost:8000/redis-test
 Method:POST
 http://localhost:8000/api/register
 
+# Step 13: Perform Unit Test Run this command
+docker compose exec web php artisan test
 -------------------------------------------------
 
 Using the Larastan library for testing and error checking
