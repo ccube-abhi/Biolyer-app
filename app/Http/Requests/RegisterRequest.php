@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\ApiRequest;
 
-class RegisterRequest extends FormRequest
+
+class RegisterRequest extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +25,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
+            'email'    => 'required|email',
             'password' => [
                 'required',
                 'string',
@@ -40,5 +41,5 @@ class RegisterRequest extends FormRequest
             'password.regex' => __('messages.password_regex'),
         ];
     }
-    
+
 }
