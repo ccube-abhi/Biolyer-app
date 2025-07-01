@@ -62,9 +62,6 @@ php artisan config:clear
 php artisan cache:clear
 php artisan route:clear
 
-echo "✅ Laravel setup completed successfully!"
-php artisan serve
-
 # Step 13: Test it
 Method: GET
 URL: http://localhost:8000/redis-test
