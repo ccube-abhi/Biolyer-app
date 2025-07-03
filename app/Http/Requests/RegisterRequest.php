@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\ApiRequest;
 
-
 class RegisterRequest extends ApiRequest
 {
     /**
@@ -20,7 +19,6 @@ class RegisterRequest extends ApiRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-
     public function rules()
     {
         return [
@@ -41,5 +39,4 @@ class RegisterRequest extends ApiRequest
             'password.regex' => __('messages.password_regex'),
         ];
     }
-
 }

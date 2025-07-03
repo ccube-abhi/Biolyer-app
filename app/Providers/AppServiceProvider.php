@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-         $this->app->bind(
+        $this->app->bind(
             \App\Interfaces\JWTAuthRepositoryInterface::class,
             \App\Repositories\JWTAuthRepository::class
         );
@@ -23,13 +23,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $acceptLang = request()->server('HTTP_ACCEPT_LANGUAGE'); 
-        $locale = substr($acceptLang, 0, 2); 
-        
-        if (in_array($locale, ['en', 'fr', 'es'])) { 
+        $acceptLang = request()->server('HTTP_ACCEPT_LANGUAGE');
+        $locale = substr($acceptLang, 0, 2);
+
+        if (in_array($locale, ['en', 'fr', 'es'])) {
             App::setLocale($locale);
         } else {
-            App::setLocale('en'); 
+            App::setLocale('en');
         }
     }
 }

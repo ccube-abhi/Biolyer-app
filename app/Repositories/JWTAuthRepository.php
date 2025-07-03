@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\User;
@@ -11,11 +12,13 @@ class JWTAuthRepository implements \App\Interfaces\JWTAuthRepositoryInterface
 {
     public function register(array $data)
     {
-        $user = User::create([
+        $user = User::create(
+            [
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        ]);
+            ]
+        );
 
         $token = JWTAuth::fromUser($user);
 
@@ -26,7 +29,7 @@ class JWTAuthRepository implements \App\Interfaces\JWTAuthRepositoryInterface
     }
 
     public function login(array $credentials)
-    {   
+    {
         Log::info('Login attempt by email: ' . $credentials['email']);
         if (!$token = JWTAuth::attempt($credentials)) {
             Log::warning('Login failed for email: ' . $credentials['email']);

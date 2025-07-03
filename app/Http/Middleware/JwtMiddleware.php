@@ -11,7 +11,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 class JwtMiddleware
 {
     public function handle($request, Closure $next)
-    {   
+    {
         try {
             $user = JWTAuth::parseToken()->authenticate();
         } catch (JWTException $e) {
@@ -21,4 +21,3 @@ class JwtMiddleware
         return $next($request);
     }
 }
-
