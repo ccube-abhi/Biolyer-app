@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class Handler extends ExceptionHandler
 {
@@ -28,9 +29,11 @@ class Handler extends ExceptionHandler
 
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        $this->reportable(
+            function (Throwable $e) {
+                //
+            }
+        );
     }
 
     public function render($request, Throwable $exception): JsonResponse
@@ -42,77 +45,104 @@ class Handler extends ExceptionHandler
 
         // 🛑 Validation errors
         if ($exception instanceof ValidationException) {
-            return response()->json([
+            return response()->json(
+                [
                 'status' => 'error',
                 'message' => 'Validation failed',
                 'errors' => $exception->errors(),
-            ], Response::HTTP_UNPROCESSABLE_ENTITY); // 422
+                ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            ); // 422
         }
 
         // 🔐 Unauthenticated
         if ($exception instanceof AuthenticationException) {
-            return response()->json([
+            return response()->json(
+                [
                 'status' => 'error',
                 'message' => 'Unauthenticated',
-            ], Response::HTTP_UNAUTHORIZED); // 401
+                ],
+                Response::HTTP_UNAUTHORIZED
+            ); // 401
         }
 
         // 🚫 Unauthorized access
         if ($exception instanceof AuthorizationException) {
-            return response()->json([
+            return response()->json(
+                [
                 'status' => 'error',
                 'message' => 'You are not authorized to perform this action',
-            ], Response::HTTP_FORBIDDEN); // 403
+                ],
+                Response::HTTP_FORBIDDEN
+            ); // 403
         }
 
         // 🚫 Route not found
         if ($exception instanceof NotFoundHttpException) {
-            return response()->json([
+            return response()->json(
+                [
                 'status' => 'error',
                 'message' => 'API route not found',
-            ], Response::HTTP_NOT_FOUND); // 404
+                ],
+                Response::HTTP_NOT_FOUND
+            ); // 404
         }
 
         // ❌ Model not found
         if ($exception instanceof ModelNotFoundException) {
-            return response()->json([
+            return response()->json(
+                [
                 'status' => 'error',
                 'message' => 'Resource not found',
-            ], Response::HTTP_NOT_FOUND); // 404
+                ],
+                Response::HTTP_NOT_FOUND
+            ); // 404
         }
 
         // ❌ Method not allowed
         if ($exception instanceof MethodNotAllowedHttpException) {
-            return response()->json([
+            return response()->json(
+                [
                 'status' => 'error',
                 'message' => 'HTTP method not allowed',
-            ], Response::HTTP_METHOD_NOT_ALLOWED); // 405
+                ],
+                Response::HTTP_METHOD_NOT_ALLOWED
+            ); // 405
         }
 
         // 🛑 Duplicate entry
         if ($exception instanceof UniqueConstraintViolationException) {
-            return response()->json([
+            return response()->json(
+                [
                 'status' => 'error',
                 'message' => 'Duplicate entry. Email or value already exists.',
-            ], Response::HTTP_CONFLICT); // 409
+                ],
+                Response::HTTP_CONFLICT
+            ); // 409
         }
 
         // ⚠️ Database errors
         if ($exception instanceof QueryException) {
-            return response()->json([
+            return response()->json(
+                [
                 'status' => 'error',
                 'message' => 'Database error occurred',
-            ], Response::HTTP_INTERNAL_SERVER_ERROR); // 500
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            ); // 500
         }
 
         // 🚨 Fallback for unhandled exceptions
-        return response()->json([
+        return response()->json(
+            [
             'status' => 'error',
             'message' => app()->isProduction()
                 ? 'Something went wrong'
                 : $exception->getMessage(),
-        ], method_exists($exception, 'getStatusCode')
+            ],
+            $exception instanceof HttpExceptionInterface
             ? $exception->getStatusCode()
-            : Response::HTTP_INTERNAL_SERVER_ERROR); // 500
+            : \Symfony\Component\HttpFoundation\Response::HTTP_INTERNAL_SERVER_ERROR
+        );
     }
 }
