@@ -83,4 +83,13 @@ list is to run the analysis. To do that, run the following command:
 
 More info: https://medium.com/@chirag.dave/how-to-get-your-laravel-app-from-0-to-9-with-larastan-5eb70da6e62e
 -----------------------------------------------------
+Used case of PHP_CodeSniffer
+You can use PSR standards or Laravel custom rules. By default, PHPCS uses PSR-12.
 
+./vendor/bin/phpcs --standard=PSR12 folder-name
+
+To automatically fix violations:
+./vendor/bin/phpcbf folder-name
+
+If its not worked clear cache and re-run PHPCBF with verbosity
+./vendor/bin/phpcbf --standard=PSR12 -v folder-name
