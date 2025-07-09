@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\ApiRequest;
-
 class RegisterRequest extends ApiRequest
 {
     /**
@@ -22,8 +20,8 @@ class RegisterRequest extends ApiRequest
     public function rules()
     {
         return [
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
             'password' => [
                 'required',
                 'string',

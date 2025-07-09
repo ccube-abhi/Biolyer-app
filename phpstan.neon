@@ -1,0 +1,18 @@
+# Includes: This line ensures Larastan’s Laravel-specific rules are included.
+# Paths: The paths array specifies the directories Larastan should analyze. You can add other folders such as database, config, etc., as needed.
+# Level: This defines the strictness level for analysis (ranges from 0 to 9). We’ll cover levels in detail later.
+# Level 0–2: Basic checks such as syntax errors, undeclared variables, and incorrect array operations.
+# Level 3–5: More advanced checks like incorrect method calls, type issues in method returns, and stricter type-checking.
+# Level 6–9: These levels focus on higher-order issues such as dead code, unused variables, incorrect property access, and more sophisticated type safety checks.
+# run Larastan from the command line vendor/bin/phpstan analyse
+# Prefare this url for detail nots: https://medium.com/@chirag.dave/how-to-get-your-laravel-app-from-0-to-9-with-larastan-5eb70da6e62e
+
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+    level: 5
+    ignoreErrors:
+        - '#Some specific error pattern#'
