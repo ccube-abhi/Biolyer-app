@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
@@ -15,7 +13,7 @@ class AuthTest extends TestCase
     {
         $response = $this->postJson('/api/register', [
             'name' => 'Abhishek',
-            'email' => 'bvskrthj@test.com',
+            'email' => 'test2@test.com',
             'password' => 'Test@th456'
         ]);
 
@@ -23,7 +21,7 @@ class AuthTest extends TestCase
 
         $response->assertJsonStructure([
             'data' => [
-                'user' =>[
+                'user' => [
                     'name',
                     'email'
                 ],

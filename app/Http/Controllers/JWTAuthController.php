@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Request;
 use App\Services\JWTAuthService;
 use App\Services\BlogService;
 use App\Http\Requests\RegisterRequest;
@@ -11,16 +10,13 @@ use App\Http\Requests\LoginRequest;
 use App\Traits\ApiResponse;
 use Illuminate\Support\Facades\Log;
 use Throwable;
-use App\Models\Blog;
-use Illuminate\Support\Facades\DB;
 
 class JWTAuthController extends Controller
 {
-    protected $authService;
-    protected $blogService;
-
     // Traits
     use ApiResponse;
+    protected $authService;
+    protected $blogService;
 
     public function __construct(JWTAuthService $authService, BlogService $blogService)
     {
@@ -79,7 +75,7 @@ class JWTAuthController extends Controller
     }
 
     public function getData()
-    {   
+    {
         try {
             $blogs = $this->blogService->getBlogs();
             return $this->successResponse('Blog list fetched successfully.', $blogs);
