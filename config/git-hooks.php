@@ -18,7 +18,7 @@ return [
     |
     */
     'pre-commit' => [
-        'vendor/bin/php-cs-fixer fix --dry-run --diff'
+        
     ],
 
     /*
@@ -70,7 +70,8 @@ return [
     |
     */
     'post-commit' => [
-
+        \Igorsgm\GitHooks\Console\Commands\Hooks\PHPCodeSnifferPreCommitHook::class, // PHPCS (with PHPCBF autofixer) 
+        \Igorsgm\GitHooks\Console\Commands\Hooks\LarastanPreCommitHook::class, // Larastan
     ],
 
     /*
