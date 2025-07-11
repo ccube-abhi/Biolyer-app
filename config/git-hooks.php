@@ -18,9 +18,9 @@ return [
     |
     */
     'pre-commit' => [
-        App\Console\GitHooks\PHPcsFixerPreCommitHook::class,
         \Igorsgm\GitHooks\Console\Commands\Hooks\LarastanPreCommitHook::class,
         \Igorsgm\GitHooks\Console\Commands\Hooks\PHPCodeSnifferPreCommitHook::class,
+         App\Console\GitHooks\PHPcsFixerPreCommitHook::class,
     ],
 
     /*
