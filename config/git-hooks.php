@@ -19,8 +19,10 @@ return [
     */
     'pre-commit' => [
         \Igorsgm\GitHooks\Console\Commands\Hooks\LarastanPreCommitHook::class,
-        \Igorsgm\GitHooks\Console\Commands\Hooks\PHPCodeSnifferPreCommitHook::class,
-         App\Console\GitHooks\PHPcsFixerPreCommitHook::class,
+        \Igorsgm\GitHooks\Console\Commands\Hooks\PHPCodeSnifferPreCommitHook::class => [
+            'standard' => base_path('phpcs.xml'), // ✅ explicitly use this file
+        ],
+        App\Console\GitHooks\PHPcsFixerPreCommitHook::class,
     ],
 
     /*
