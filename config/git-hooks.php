@@ -196,8 +196,8 @@ return [
         'laravel_pint' => [
             'enabled' => true,
             'file_extensions' => ['php'],
-            'path' => './vendor/bin/pint',
-            'config' => './pint.json', // Optional if using default
+            'path' => 'vendor/bin/pint',
+            'config' => 'pint.json', // Optional if using default
             'preset' => 'laravel', // Optional if using default
             'run_in_docker' => false,
             'docker_container' => '',
