@@ -141,8 +141,7 @@ class Handler extends ExceptionHandler
                     ? 'Something went wrong'
                     : $exception->getMessage(),
             ],
-
-
+            
             
             $exception instanceof HttpExceptionInterface
             ? $exception->getStatusCode()

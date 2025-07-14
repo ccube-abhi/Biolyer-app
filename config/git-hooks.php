@@ -196,7 +196,7 @@ return [
         'laravel_pint' => [
             'enabled' => true,
             'file_extensions' => ['php'],
-            'path' => './vendor/bin/pint',
+            'path' => 'vendor/bin/pint',
             'run_in_docker' => false,
             'docker_container' => '',
         ],
