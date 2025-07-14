@@ -19,7 +19,10 @@ return [
     */
     'pre-commit' => [
         \Igorsgm\GitHooks\Console\Commands\Hooks\LarastanPreCommitHook::class => [],
-        \Igorsgm\GitHooks\Console\Commands\Hooks\PHPCodeSnifferPreCommitHook::class => [],
+        \Igorsgm\GitHooks\Console\Commands\Hooks\PHPCodeSnifferPreCommitHook::class => [
+            'standard' => './phpcs.xml', // ✅ force hook to use your standard
+            'autoAddFixedFiles' => true,
+        ],
         App\Console\GitHooks\PHPcsFixerPreCommitHook::class => [],
     ],
 
