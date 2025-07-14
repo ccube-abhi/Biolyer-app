@@ -139,6 +139,8 @@ class Handler extends ExceptionHandler
                 ? 'Something went wrong'
                 : $exception->getMessage(),
             ],
+
+            
             $exception instanceof HttpExceptionInterface
             ? $exception->getStatusCode()
             : \Symfony\Component\HttpFoundation\Response::HTTP_INTERNAL_SERVER_ERROR
