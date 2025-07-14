@@ -24,10 +24,7 @@ return [
             'autoAddFixedFiles' => true,
         ],*/
         // App\Console\GitHooks\PHPcsFixerPreCommitHook::class => [],
-        \Igorsgm\GitHooks\Console\Commands\Hooks\PintPreCommitHook::class => [
-            'standard' => './pint.json', // ✅ force hook to use your standard
-            'autoAddFixedFiles' => true,
-        ], // Laravel Pint
+        \Igorsgm\GitHooks\Console\Commands\Hooks\PintPreCommitHook::class => [], // Laravel Pint
     ],
 
     /*
@@ -197,6 +194,8 @@ return [
             'enabled' => true,
             'file_extensions' => ['php'],
             'path' => 'vendor/bin/pint',
+            'config' => './pint.json', // Optional if using default
+            'preset' => 'laravel', // Optional if using default
             'run_in_docker' => false,
             'docker_container' => '',
         ],
