@@ -14,12 +14,17 @@ class PHPcsFixerPreCommitHook implements Hook
 
     public function handle(): void
     {
-        $process = new Process(['./vendor/bin/php-cs-fixer', 'fix', '--dry-run', '--diff']);
+        // Run php-cs-fixer in fix mode
+        $process = new Process(['./vendor/bin/php-cs-fixer', 'fix']);
         $process->run();
 
         if (!$process->isSuccessful()) {
-            echo $process->getOutput();
-            exit(1); // Cancel the commit
+            echo $process->getErrorOutput();
+            exit(1);
         }
+
+        // Re-stage all modified PHP files
+        $gitAdd = new Process(['git', 'add', '-u']);
+        $gitAdd->run();
     }
 }
