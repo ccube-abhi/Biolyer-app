@@ -19,11 +19,15 @@ return [
     */
     'pre-commit' => [
         \Igorsgm\GitHooks\Console\Commands\Hooks\LarastanPreCommitHook::class => [],
-        \Igorsgm\GitHooks\Console\Commands\Hooks\PHPCodeSnifferPreCommitHook::class => [
+        /*\Igorsgm\GitHooks\Console\Commands\Hooks\PHPCodeSnifferPreCommitHook::class => [
             'standard' => './phpcs.xml', // ✅ force hook to use your standard
             'autoAddFixedFiles' => true,
-        ],
-        App\Console\GitHooks\PHPcsFixerPreCommitHook::class => [],
+        ],*/
+        // App\Console\GitHooks\PHPcsFixerPreCommitHook::class => [],
+        \Igorsgm\GitHooks\Console\Commands\Hooks\PintPreCommitHook::class => [
+            'standard' => './pint.json', // ✅ force hook to use your standard
+            'autoAddFixedFiles' => true,
+        ], // Laravel Pint
     ],
 
     /*
@@ -189,7 +193,15 @@ return [
             'run_in_docker' => env('LARAVEL_LARASTAN_RUN_IN_DOCKER', false),
             'docker_container' => env('LARAVEL_LARASTAN_DOCKER_CONTAINER', ''),
         ],
-
+        'laravel_pint' => [
+            'enabled' => true,
+            'file_extensions' => ['php'],
+            'path' => './vendor/bin/pint',
+            'config' => './pint.json', // Optional if using default
+            'preset' => 'laravel', // Optional if using default
+            'run_in_docker' => false,
+            'docker_container' => '',
+        ],
     ],
 
     /*
