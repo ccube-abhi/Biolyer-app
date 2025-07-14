@@ -140,6 +140,7 @@ class Handler extends ExceptionHandler
                 : $exception->getMessage(),
             ],
 
+
             
             $exception instanceof HttpExceptionInterface
             ? $exception->getStatusCode()
