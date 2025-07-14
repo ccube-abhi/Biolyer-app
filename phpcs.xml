@@ -5,15 +5,11 @@
     <!-- PSR-12 Standard -->
     <rule ref="PSR12"/>
 
-    <!-- Color the result output -->
-    <arg name="colors" />
+    <arg value=“ps” />   <arg name=“progress”/>
 
-    <!-- Show progress of the run -->
-    <arg value="ps" />
-
-    <!-- Code directory -->
-    <file>app/</file>
+    <exclude-pattern>vendor</exclude-pattern>  
     
-    <exclude-pattern>vendor</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
 
 </ruleset>
