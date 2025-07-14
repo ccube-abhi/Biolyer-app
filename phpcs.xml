@@ -2,14 +2,16 @@
 <ruleset name="Custom Coding Standards">
     <description>PHPCS Custom Ruleset Example</description>
 
-    <!-- PSR-12 Standard -->
+        <!-- Use PSR-12 coding standard -->
     <rule ref="PSR12"/>
 
-    <arg value=“ps” />   <arg name=“progress”/>
+    <!-- Show colored output -->
+    <arg name="colors"/>
 
-    <exclude-pattern>vendor</exclude-pattern>  
-    
+    <!-- Scan the 'app' directory -->
+    <file>app</file>
+
+    <!-- Exclude vendor folder -->
     <exclude-pattern>*/vendor/*</exclude-pattern>
-
 
 </ruleset>
