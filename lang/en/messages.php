@@ -9,4 +9,5 @@ return [
     'success' => 'success',
     'error' => 'false',
     'token_error' => 'Token not valid',
+    'server_error' => 'Something went wrong',
 ];

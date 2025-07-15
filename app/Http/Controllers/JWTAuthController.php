@@ -36,7 +36,7 @@ class JWTAuthController extends Controller
         } catch (Throwable $e) {
             Log::error('Register Error: '.$e->getMessage(), ['exception' => $e]);
 
-            return $this->errorResponse(__('messages.server_error'), Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -52,7 +52,7 @@ class JWTAuthController extends Controller
         } catch (Throwable $e) {
             Log::error('Login Error: '.$e->getMessage(), ['exception' => $e]);
 
-            return $this->errorResponse(__('messages.server_error'), Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -65,7 +65,7 @@ class JWTAuthController extends Controller
         } catch (Throwable $e) {
             Log::error('Logout Error: '.$e->getMessage(), ['exception' => $e]);
 
-            return $this->errorResponse(__('messages.server_error'), Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -78,20 +78,7 @@ class JWTAuthController extends Controller
         } catch (Throwable $e) {
             Log::error('Get User Info Error: '.$e->getMessage(), ['exception' => $e]);
 
-            return $this->errorResponse(__('messages.server_error'), Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    public function getData()
-    {
-        try {
-            $blogs = $this->blogService->getBlogs();
-
-            return $this->successResponse('Blog list fetched successfully.', $blogs);
-        } catch (Throwable $e) {
-            Log::error('Blog fetch error: '.$e->getMessage(), ['exception' => $e]);
-
-            return $this->errorResponse('Something went wrong while fetching blogs.', Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
