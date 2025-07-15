@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JWTAuthRepository implements \App\Interfaces\JWTAuthRepositoryInterface
@@ -14,9 +14,9 @@ class JWTAuthRepository implements \App\Interfaces\JWTAuthRepositoryInterface
     {
         $user = User::create(
             [
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
             ]
         );
 
@@ -24,18 +24,20 @@ class JWTAuthRepository implements \App\Interfaces\JWTAuthRepositoryInterface
 
         return [
             'user' => $user,
-            'token' => $token
+            'token' => $token,
         ];
     }
 
     public function login(array $credentials)
     {
-        Log::info('Login attempt by email: ' . $credentials['email']);
-        if (!$token = JWTAuth::attempt($credentials)) {
-            Log::warning('Login failed for email: ' . $credentials['email']);
+        Log::info('Login attempt by email: '.$credentials['email']);
+        if (! $token = JWTAuth::attempt($credentials)) {
+            Log::warning('Login failed for email: '.$credentials['email']);
+
             return false;
         }
-        Log::info('Login success for: ' . $credentials['email']);
+        Log::info('Login success for: '.$credentials['email']);
+
         return $token;
     }
 

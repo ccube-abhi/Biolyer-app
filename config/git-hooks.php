@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |-----------------------------------------------------------------
     | Pre-Commit Hooks
@@ -24,6 +23,7 @@ return [
             'autoAddFixedFiles' => true,
         ],*/
         // App\Console\GitHooks\PHPcsFixerPreCommitHook::class => [],
+        App\Console\GitHooks\PintAutoFixPreCommitHook::class, // ✅ Auto-fix
         \Igorsgm\GitHooks\Console\Commands\Hooks\PintPreCommitHook::class => [], // Laravel Pint
     ],
 
@@ -44,7 +44,6 @@ return [
     |
     */
     'prepare-commit-msg' => [
-
     ],
 
     /*
@@ -60,7 +59,6 @@ return [
     |
     */
     'commit-msg' => [
-
     ],
 
     /*
@@ -76,7 +74,6 @@ return [
     |
     */
     'post-commit' => [
-
     ],
 
     /*
@@ -93,7 +90,6 @@ return [
     |
     */
     'pre-rebase' => [
-
     ],
 
     /*
@@ -109,7 +105,6 @@ return [
     |
     */
     'post-rewrite' => [
-
     ],
 
     /*
@@ -125,7 +120,6 @@ return [
     |
     */
     'post-checkout' => [
-
     ],
 
     /*
@@ -142,7 +136,6 @@ return [
     |
     */
     'post-merge' => [
-
     ],
 
     /*
@@ -159,7 +152,6 @@ return [
     |
     */
     'pre-push' => [
-
     ],
 
     /*
@@ -194,7 +186,7 @@ return [
             'enabled' => true,
             'file_extensions' => ['php'],
             'path' => 'vendor/bin/pint',
-            'config' => getcwd() . '/pint.json', // Optional if using default
+            'config' => getcwd().'/pint.json', // Optional if using default
             'preset' => 'laravel', // Optional if using default
             'run_in_docker' => false,
             'docker_container' => '',

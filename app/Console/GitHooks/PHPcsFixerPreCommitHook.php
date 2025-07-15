@@ -18,7 +18,7 @@ class PHPcsFixerPreCommitHook implements Hook
         $process = new Process(['./vendor/bin/php-cs-fixer', 'fix']);
         $process->run();
 
-        if (!$process->isSuccessful()) {
+        if (! $process->isSuccessful()) {
             echo $process->getErrorOutput();
             exit(1);
         }

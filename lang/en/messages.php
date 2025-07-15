@@ -8,5 +8,5 @@ return [
     'logout_success' => 'User logged out',
     'success' => 'success',
     'error' => 'false',
-    'token_error' => 'Token not valid'
+    'token_error' => 'Token not valid',
 ];
