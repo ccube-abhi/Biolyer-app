@@ -23,7 +23,7 @@ class LoginRequest extends ApiRequest
             'email' => 'required|email',
             'password' => [
                 'required',
-                'string'
+                'string',
             ],
         ];
     }

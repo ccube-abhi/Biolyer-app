@@ -8,5 +8,5 @@ return [
     'logout_success' => 'Utilisateur déconnecté',
     'success' => 'succès',
     'error' => 'faux',
-    'token_error' => 'Jeton non valide'
+    'token_error' => 'Jeton non valide',
 ];

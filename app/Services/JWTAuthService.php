@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Log;
 use App\Interfaces\JWTAuthRepositoryInterface;
+use Illuminate\Support\Facades\Log;
 
 class JWTAuthService
 {
@@ -22,11 +22,12 @@ class JWTAuthService
     public function loginUser(array $credentials)
     {
         $token = $this->authRepo->login($credentials);
-        if (!$token) {
+        if (! $token) {
             Log::error('AuthService: Login failed.');
         } else {
             Log::info('AuthService: Token issued.');
         }
+
         return $token;
     }
 

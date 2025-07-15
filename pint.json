@@ -1,0 +1,25 @@
+{
+  "preset": "laravel",
+  "rules": {
+    "no_extra_blank_lines": {
+      "tokens": [
+        "extra",
+        "throw",
+        "use",
+        "return",
+        "curly_brace_block",
+        "parenthesis_brace_block",
+        "square_brace_block",
+        "continue",
+        "break",
+        "switch",
+        "case",
+        "default"
+      ]
+    },
+    "no_trailing_whitespace": true,
+    "no_whitespace_in_blank_line": true,
+    "blank_line_after_opening_tag": true,
+    "single_blank_line_at_eof": true
+  }
+}
