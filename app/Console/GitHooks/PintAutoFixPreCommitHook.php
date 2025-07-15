@@ -11,7 +11,7 @@ class PintAutoFixPreCommitHook implements PreCommitHook
 {
     public function getName(): string
     {
-        return 'Pint Auto Fix Pre-Commit Hook';
+        return 'pint-auto-fix-pre-commit-hook';
     }
 
     public function handle(ChangedFiles $files, Closure $next)
