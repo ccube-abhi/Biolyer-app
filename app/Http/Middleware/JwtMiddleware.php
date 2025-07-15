@@ -14,7 +14,7 @@ class JwtMiddleware
         try {
             $user = JWTAuth::parseToken()->authenticate();
         } catch (JWTException $e) {
-            return response()->json(['token_error' => __('messages.password_regex')], Response::HTTP_UNAUTHORIZED);
+            return response()->json(['token_error' => __('messages.token_error')], Response::HTTP_UNAUTHORIZED);
         }
 
         return $next($request);
