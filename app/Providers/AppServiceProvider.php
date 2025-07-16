@@ -5,6 +5,7 @@ namespace App\Providers;
 use Dedoc\Scramble\Scramble;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -26,6 +27,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Log::info('MAIL DEBUG', [
+            'mailer' => config('mail.default'),
+            'host' => config('mail.mailers.smtp.host'),
+            'port' => config('mail.mailers.smtp.port'),
+            'username' => config('mail.mailers.smtp.username'),
+            'encryption' => config('mail.mailers.smtp.encryption'),
+            'from' => config('mail.from.address'),
+            'name' => config('mail.from.name'),
+        ]);
+
         $acceptLang = request()->server('HTTP_ACCEPT_LANGUAGE');
         $locale = substr($acceptLang, 0, 2);
 

@@ -10,4 +10,5 @@ return [
     'error' => 'false',
     'token_error' => 'Token not valid',
     'server_error' => 'Something went wrong',
+    'reset_your_password' => 'Reset Your Password',
 ];
