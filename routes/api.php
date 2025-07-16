@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\V1\BlogController;
 use App\Http\Controllers\Api\V1\ForgotPasswordController;
-use App\Http\Controllers\JWTAuthController;
+use App\Http\Controllers\Api\V1\JWTAuthController;
 use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Support\Facades\Route;
 

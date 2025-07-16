@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Blog;
 
 class BlogRepository
 {
     public function getAllBlogs()
     {
-        return DB::connection('mysql_second')->table('blogs')->get();
+        return Blog::all();
     }
 }
