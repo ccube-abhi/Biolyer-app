@@ -13,7 +13,11 @@ includes:
 parameters:
     paths:
         - app
-    level: 5
+        - routes
+        - database/factories
+        - database/seeders
+    level: 8
+    
     ignoreErrors:
         - '#Some specific error pattern#'
         

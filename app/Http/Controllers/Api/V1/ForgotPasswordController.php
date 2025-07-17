@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
@@ -12,7 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ForgotPasswordController extends Controller
 {
-    public function sendResetLink(ForgotPasswordRequest $request)
+    /**
+     * Send Reset Link
+     */
+    public function sendResetLink(ForgotPasswordRequest $request): JsonResponse
     {
         try {
             $status = Password::sendResetLink($request->only('email'));
@@ -34,7 +38,7 @@ class ForgotPasswordController extends Controller
         return response()->json(['message' => __($status)], Response::HTTP_BAD_REQUEST);
     }
 
-    public function reset(ResetPasswordRequest $request)
+    public function reset(ResetPasswordRequest $request): JsonResponse
     {
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),

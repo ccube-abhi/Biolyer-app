@@ -75,6 +75,7 @@
         "/v1/forgot-password": {
             "post": {
                 "operationId": "v1.send-link",
+                "summary": "Send Reset Link",
                 "tags": [
                     "ForgotPassword"
                 ],
@@ -154,7 +155,7 @@
         },
         "/v1/reset-password": {
             "post": {
-                "operationId": "v1.reset-password",
+                "operationId": "reset-password",
                 "tags": [
                     "ForgotPassword"
                 ],
