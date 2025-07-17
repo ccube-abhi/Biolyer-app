@@ -21,6 +21,7 @@ return [
         \Igorsgm\GitHooks\Console\Commands\Hooks\PHPCodeSnifferPreCommitHook::class => [
             'standard' => './phpcs.xml', // ✅ force hook to use your standard
             'failOnError' => true,       // ✅ fail the commit if errors found
+            'showOutput' => true,             // ✅ Shows full error output
         ],
         // App\Console\GitHooks\PHPcsFixerPreCommitHook::class => [],
         App\Console\GitHooks\PintAutoFixPreCommitHook::class, // ✅ Auto-fix
