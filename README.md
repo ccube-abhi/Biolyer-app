@@ -15,7 +15,7 @@ A modern Laravel 11 application pre-configured with Docker, Redis, MySQL, and es
 ## 📦 Project Setup (Using Docker)
 
 ### 1. Clone Repository
-git https://github.com/ccube-abhi/laravel-base-template
+git clone https://github.com/ccube-abhi/laravel-base-template
 cd laravel-base-template
 
 ### 2. Environment Setup
