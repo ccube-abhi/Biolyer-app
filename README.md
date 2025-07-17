@@ -1,6 +1,6 @@
-# 🧬 Biolyer App - Laravel 12 + Docker + Redis + MySQL
+# 🧬 Biolyer App - Laravel 11 + Docker + Redis + MySQL
 
-A modern Laravel 11 application pre-configured with Docker, Redis, MySQL, and essential development tools like Larastan, Laravel Pint, PHP_CodeSniffer, and Scramble.
+A modern Laravel 11 application pre-configured with Docker, Redis, MySQL, and essential development tools like Larastan, Laravel Pint, PHP_CodeSniffer, Scramble, and Git Hooks.
 
 ---
 
@@ -83,7 +83,7 @@ vendor/bin/phpstan analyse --memory-limit=512M app
 vendor/bin/phpcs --standard=PSR12 app
 # Auto-fix errors
 vendor/bin/phpcbf --standard=PSR12 app
-#If you face issues, try clearing cache or re-run with verbose:
+# If you face issues, try clearing cache or re-run with verbose:
 vendor/bin/phpcbf --standard=PSR12 -v app
 
 ### 11. API Documentation using Scramble
@@ -103,3 +103,13 @@ public function register(RegisterRequest $request)
 # php artisan scramble:generate
 # Export OpenAPI schema to a JSON api.json file:
 # php artisan scramble:export
+
+### 13. Git Hooks with igorsgm/laravel-git-hooks
+# This project uses igorsgm/laravel-git-hooks to automatically enforce code standards and quality checks before every commit.
+# 🔧 What Happens on Every Commit
+# When you run git commit, the following actions are automatically triggered:
+# ✅ Laravel Pint — auto-formats code
+# ✅ PHP_CodeSniffer — checks for PSR-12 violations
+# ✅ Optional: Add your own custom scripts in config/git-hooks.php
+# To manually test the hook logic:
+ ./vendor/bin/git-hooks run
