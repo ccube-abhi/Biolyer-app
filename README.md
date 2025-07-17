@@ -1,95 +1,105 @@
-#!/bin/bash
+# 🧬 Biolyer App - Laravel 12 + Docker + Redis + MySQL
 
-echo "🚀 Starting Laravel Project Setup (Docker + Redis + MySQL)..."
+A modern Laravel 11 application pre-configured with Docker, Redis, MySQL, and essential development tools like Larastan, Laravel Pint, PHP_CodeSniffer, and Scramble.
 
-# Step 1: Clone the repository
-echo "📦 Cloning project..."
-git clone https://github.com/ccube-abhi/Biolyer-app.git
-cd Biolyer-app || exit
+---
 
-# Step 2: Install PHP dependencies
-echo "📦 Installing composer dependencies..."
-composer install 
+## 🚀 Prerequisites
 
-# Step 3: Copy .env file
-echo "📄 Copying .env.example to .env..."
+- Docker & Docker Compose
+- Git
+- No need to install PHP, Composer, MySQL, or Redis locally – everything runs in Docker containers.
+
+---
+
+## 📦 Project Setup (Using Docker)
+
+### 1. Clone Repository
+git https://github.com/ccube-abhi/Laravel-base-template
+cd Laravel-base-template
+
+### 2. Environment Setup
 cp .env.example .env
 
-# Step 4: Update .env for MySQL & Redis (manual or edit below if needed)
-echo "⚙️  Ensure .env is configured for Docker MySQL and Redis"
 DB_CONNECTION=mysql
 DB_HOST=host.docker.internal
 DB_PORT=3306
-DB_DATABASE=db_name
-DB_USERNAME=username
-DB_PASSWORD=password
+DB_DATABASE=base-temp
+DB_USERNAME=root
+DB_PASSWORD=secret
 
-# Step 5: Generate Laravel application key
-echo "🔑 Generating Laravel app key..."
-php artisan key:generate
-
-# Step 6: Set JWT secret
-echo "🔐 Generating JWT secret..."
-php artisan jwt:secret
-
-# Step 7: Setup Redis 
-Add this into your .env file
 REDIS_CLIENT=phpredis
-REDIS_HOST=host_name     //redis-test
+REDIS_HOST=redis-test
 REDIS_PORT=6379
-"⚠️ Set REDIS_HOST=redis-test to match your container name in docker-compose.yml"
 
-# Step 8: Start Docker containers
-echo "🐳 Starting Docker containers..."
-Click Docker icon in your macOS menu bar.
-Go to Preferences (or Settings)
-Navigate to Resources → File Sharing.
-Add this path: /Applications/XAMPP/xamppfiles/htdocs/...
-
-# Step 9: Start composer
+### 3. Build and Start Docker Containers
 docker compose up -d --build
+Make sure Docker has file access permission to your project folder:
+macOS: Docker Desktop → Settings → Resources → File Sharing → Add /Applications/XAMPP/xamppfiles/htdocs/...
 
-# Step 10: Run migrations
-echo "🧱 Running database migrations..."
-docker compose exec web php artisan migrate
+### 4. Laravel Setup (Inside Docker Container)
+# Install dependencies (inside container)
+docker compose exec base-temp composer install
 
-# Step 11: Run migrations
-docker compose exec web php artisan db:seed
+# Generate app key and JWT secret
+docker compose exec base-temp php artisan key:generate
+docker compose exec base-temp php artisan jwt:secret
 
-# Step 12: Clear cache
-echo "🧹 Clearing config and route cache..."
-php artisan config:clear
-php artisan cache:clear
-php artisan route:clear
+# Run migrations and seeders
+docker compose exec base-temp php artisan migrate
+docker compose exec base-temp php artisan db:seed
 
-# Step 13: Test it
-Method: GET
-URL: http://localhost:8000/redis-test
+# Clear cache
+docker compose exec base-temp php artisan config:clear
+docker compose exec base-temp php artisan route:clear
+docker compose exec base-temp php artisan cache:clear
 
-Method:POST
-http://localhost:8000/api/register
+### 5. Test Endpoints
+Redis Test
+GET http://localhost:8000/redis-test
 
-# Step 13: Perform Unit Test Run this command
-docker compose exec web php artisan test
--------------------------------------------------
+Register User
+POST http://localhost:8000/api/register
 
-Using the Larastan library for testing and error checking
+### 6. Run Unit Tests
+docker compose exec base-temp php artisan test
 
-# Step 1: Intro, Installation and Common Errors
-It shows you potential errors in your code with just one terminal command! Or even better - right in your editor. Let's look at what it brings
+### 7. Code Quality Tools
+Laravel Pint (PSR-12 Formatter)
+# Auto-format your code
+# Optionally configure .pint.json for custom rules.
+vendor/bin/pint
 
-list is to run the analysis. To do that, run the following command:
-./vendor/bin/phpstan analyse folder-name
+### 8. Larastan (Static Analysis)
+# Analyze your Laravel app
+vendor/bin/phpstan analyse --memory-limit=512M app
 
-More info: https://medium.com/@chirag.dave/how-to-get-your-laravel-app-from-0-to-9-with-larastan-5eb70da6e62e
------------------------------------------------------
-Used case of PHP_CodeSniffer
-You can use PSR standards or Laravel custom rules. By default, PHPCS uses PSR-12.
+### 9. Larastan (Static Analysis)
+# Analyze your Laravel app(folder-name-for-analze)
+vendor/bin/phpstan analyse --memory-limit=512M app
 
-./vendor/bin/phpcs --standard=PSR12 folder-name
+### 10. PHP_CodeSniffer
+# Check code using PSR-12
+vendor/bin/phpcs --standard=PSR12 app
+# Auto-fix errors
+vendor/bin/phpcbf --standard=PSR12 app
+#If you face issues, try clearing cache or re-run with verbose:
+vendor/bin/phpcbf --standard=PSR12 -v app
 
-To automatically fix violations:
-./vendor/bin/phpcbf folder-name
+### 11. API Documentation using Scramble
+# Usage Instructions
+# Add comments using PHPDoc format above your controller methods.
+# Scramble will auto-generate OpenAPI spec and UI.
+Example:
+/**
+ * Register a new user.
+ */
+public function register(RegisterRequest $request)
+{
+    //code...
+}
 
-If its not worked clear cache and re-run PHPCBF with verbosity
-./vendor/bin/phpcbf --standard=PSR12 -v folder-name
+### 12. Generate API Docs
+# php artisan scramble:generate
+# Export OpenAPI schema to a JSON api.json file:
+# php artisan scramble:export
