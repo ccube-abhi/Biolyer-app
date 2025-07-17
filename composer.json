@@ -15,7 +15,6 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
-        "friendsofphp/php-cs-fixer": "^3.80",
         "igorsgm/laravel-git-hooks": "^1.3",
         "laravel/pail": "^1.1",
         "laravel/pint": "^1.13",

@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class blog extends Model
+class Blog extends Model
 {
+    protected $table = 'blogs';
+
     protected $connection = 'mysql_second';
 
     protected $fillable = [

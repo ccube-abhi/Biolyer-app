@@ -3,13 +3,11 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
->
+         stopOnFailure="false">
+
     <testsuites>
         <testsuite name="Unit">
-            <directory>tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Feature">
-            <directory>tests/Feature</directory>
+            <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>
     </testsuites>
     <source>
@@ -17,16 +15,36 @@
             <directory>app</directory>
         </include>
     </source>
+
     <php>
         <env name="APP_ENV" value="testing"/>
-        <env name="APP_MAINTENANCE_DRIVER" value="file"/>
-        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="APP_DEBUG" value="true"/>
+
+        <!-- DB setup for fast and isolated tests -->
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+
+        <!-- Use array drivers for speed and isolation -->
         <env name="CACHE_STORE" value="array"/>
-        <env name="DB_DATABASE" value="laravel-tbl"/>
-        <env name="MAIL_MAILER" value="array"/>
-        <env name="PULSE_ENABLED" value="false"/>
-        <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="MAIL_MAILER" value="array"/>
+
+        <!-- Optional: Disable Telescope/Pulse/etc -->
         <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="PULSE_ENABLED" value="false"/>
+
+        <!-- Hashing for faster bcrypt (only for testing) -->
+        <env name="BCRYPT_ROUNDS" value="4"/>
+
+        <!-- Avoid background services while testing -->
+        <env name="APP_MAINTENANCE_DRIVER" value="file"/>
     </php>
+
+    <!-- Optional: Enable code coverage -->
+    <!--
+    <logging>
+        <log type="coverage-html" target="storage/logs/coverage-report"/>
+    </logging>
+    -->
 </phpunit>

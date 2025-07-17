@@ -28,6 +28,7 @@ class RegisterRequest extends ApiRequest
                 'min:8',
                 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/',
             ],
+            'address' => 'nullable',
         ];
     }
 

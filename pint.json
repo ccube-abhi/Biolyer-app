@@ -1,6 +1,15 @@
 {
-  "preset": "laravel",
+  "preset": "psr12",
   "rules": {
+    "array_syntax": {
+      "syntax": "short"
+    },
+    "ordered_imports": {
+      "imports_order": ["class", "function", "const"],
+      "sort_algorithm": "alpha"
+    },
+    "single_blank_line_at_eof": true,
+    "no_unused_imports": true,
     "no_extra_blank_lines": {
       "tokens": [
         "extra",
@@ -20,6 +29,26 @@
     "no_trailing_whitespace": true,
     "no_whitespace_in_blank_line": true,
     "blank_line_after_opening_tag": true,
-    "single_blank_line_at_eof": true
+    "blank_line_after_namespace": true,
+    "method_argument_space": {
+      "on_multiline": "ensure_fully_multiline"
+    },
+    "multiline_whitespace_before_semicolons": {
+      "strategy": "no_multi_line"
+    },
+    "binary_operator_spaces": {
+      "default": "single_space"
+    },
+    "cast_spaces": {
+      "space": "single"
+    },
+    "concat_space": {
+      "spacing": "one"
+    },
+    "phpdoc_trim": true,
+    "phpdoc_scalar": true,
+    "phpdoc_align": {
+      "align": "left"
+    }
   }
 }

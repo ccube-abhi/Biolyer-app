@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Services\BlogService;
 use App\Services\JWTAuthService;
-use App\Traits\ApiResponse;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class JWTAuthController extends Controller
 {
-    // Traits
-    use ApiResponse;
-
     protected $authService;
 
     protected $blogService;
@@ -26,6 +23,9 @@ class JWTAuthController extends Controller
         $this->blogService = $blogService;
     }
 
+    /**
+     * Register
+     */
     public function register(RegisterRequest $request)
     {
         try {
@@ -34,12 +34,15 @@ class JWTAuthController extends Controller
 
             return $this->successResponse(__('messages.register_success'), $user, Response::HTTP_CREATED);
         } catch (Throwable $e) {
-            Log::error('Register Error: '.$e->getMessage(), ['exception' => $e]);
+            Log::error('Register Error: ' . $e->getMessage(), ['exception' => $e]);
 
             return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
+    /**
+     * Login
+     */
     public function login(LoginRequest $request)
     {
         try {
@@ -50,12 +53,15 @@ class JWTAuthController extends Controller
                 ? $this->successResponse(__('messages.login_success'), ['token' => $token])
                 : $this->errorResponse(__('messages.login_error'), Response::HTTP_UNAUTHORIZED);
         } catch (Throwable $e) {
-            Log::error('Login Error: '.$e->getMessage(), ['exception' => $e]);
+            Log::error('Login Error: ' . $e->getMessage(), ['exception' => $e]);
 
             return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
+    /**
+     * Logout
+     */
     public function logout()
     {
         try {
@@ -63,12 +69,15 @@ class JWTAuthController extends Controller
 
             return $this->successResponse(__('messages.logout_success'), Response::HTTP_OK);
         } catch (Throwable $e) {
-            Log::error('Logout Error: '.$e->getMessage(), ['exception' => $e]);
+            Log::error('Logout Error: ' . $e->getMessage(), ['exception' => $e]);
 
             return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
+    /**
+     * User Details
+     */
     public function me()
     {
         try {
@@ -76,7 +85,7 @@ class JWTAuthController extends Controller
 
             return $this->successResponse(__('messages.login_success'), $user, Response::HTTP_OK);
         } catch (Throwable $e) {
-            Log::error('Get User Info Error: '.$e->getMessage(), ['exception' => $e]);
+            Log::error('Get User Info Error: ' . $e->getMessage(), ['exception' => $e]);
 
             return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
