@@ -4,16 +4,12 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Services\BlogService;
-use App\Traits\ApiResponse;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class BlogController extends Controller
 {
-    // Traits
-    use ApiResponse;
-
     protected $blogService;
 
     public function __construct(BlogService $blogService)
@@ -21,6 +17,9 @@ class BlogController extends Controller
         $this->blogService = $blogService;
     }
 
+    /**
+     * Blog Listing
+     */
     public function getData()
     {
         try {

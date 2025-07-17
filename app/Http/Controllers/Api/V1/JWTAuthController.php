@@ -23,6 +23,9 @@ class JWTAuthController extends Controller
         $this->blogService = $blogService;
     }
 
+    /**
+     * Register
+     */
     public function register(RegisterRequest $request)
     {
         try {
@@ -37,6 +40,9 @@ class JWTAuthController extends Controller
         }
     }
 
+    /**
+     * Login
+     */
     public function login(LoginRequest $request)
     {
         try {
@@ -53,6 +59,9 @@ class JWTAuthController extends Controller
         }
     }
 
+    /**
+     * Logout
+     */
     public function logout()
     {
         try {
@@ -66,6 +75,9 @@ class JWTAuthController extends Controller
         }
     }
 
+    /**
+     * User Details
+     */
     public function me()
     {
         try {
