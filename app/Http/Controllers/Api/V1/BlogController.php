@@ -27,7 +27,7 @@ class BlogController extends Controller
 
             return $this->successResponse('Blog list fetched successfully.', $blogs);
         } catch (Throwable $e) {
-            Log::error('Blog fetch error: '.$e->getMessage(), ['exception' => $e]);
+            Log::error('Blog fetch error: ' . $e->getMessage(), ['exception' => $e]);
 
             return $this->errorResponse($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }

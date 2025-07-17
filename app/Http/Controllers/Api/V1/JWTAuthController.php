@@ -34,7 +34,7 @@ class JWTAuthController extends Controller
 
             return $this->successResponse(__('messages.register_success'), $user, Response::HTTP_CREATED);
         } catch (Throwable $e) {
-            Log::error('Register Error: '.$e->getMessage(), ['exception' => $e]);
+            Log::error('Register Error: ' . $e->getMessage(), ['exception' => $e]);
 
             return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -53,7 +53,7 @@ class JWTAuthController extends Controller
                 ? $this->successResponse(__('messages.login_success'), ['token' => $token])
                 : $this->errorResponse(__('messages.login_error'), Response::HTTP_UNAUTHORIZED);
         } catch (Throwable $e) {
-            Log::error('Login Error: '.$e->getMessage(), ['exception' => $e]);
+            Log::error('Login Error: ' . $e->getMessage(), ['exception' => $e]);
 
             return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -69,7 +69,7 @@ class JWTAuthController extends Controller
 
             return $this->successResponse(__('messages.logout_success'), Response::HTTP_OK);
         } catch (Throwable $e) {
-            Log::error('Logout Error: '.$e->getMessage(), ['exception' => $e]);
+            Log::error('Logout Error: ' . $e->getMessage(), ['exception' => $e]);
 
             return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -85,7 +85,7 @@ class JWTAuthController extends Controller
 
             return $this->successResponse(__('messages.login_success'), $user, Response::HTTP_OK);
         } catch (Throwable $e) {
-            Log::error('Get User Info Error: '.$e->getMessage(), ['exception' => $e]);
+            Log::error('Get User Info Error: ' . $e->getMessage(), ['exception' => $e]);
 
             return $this->errorResponse(__('messages.server_error', ['error' => $e->getMessage()]), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
