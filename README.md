@@ -105,11 +105,11 @@ public function register(RegisterRequest $request)
 # php artisan scramble:export
 
 ### 13. Git Hooks with igorsgm/laravel-git-hooks
-# This project uses igorsgm/laravel-git-hooks to automatically enforce code standards and quality checks before every commit.
-# 🔧 What Happens on Every Commit
-# When you run git commit, the following actions are automatically triggered:
-# ✅ Laravel Pint — auto-formats code
-# ✅ PHP_CodeSniffer — checks for PSR-12 violations
-# ✅ Optional: Add your own custom scripts in config/git-hooks.php
-# To manually test the hook logic:
+This project uses igorsgm/laravel-git-hooks to automatically enforce code standards and quality checks before every commit.
+🔧 What Happens on Every Commit
+When you run git commit, the following actions are automatically triggered:
+✅ Laravel Pint — auto-formats code
+✅ PHP_CodeSniffer — checks for PSR-12 violations
+✅ Optional: Add your own custom scripts in config/git-hooks.php
+To manually test the hook logic:
  ./vendor/bin/git-hooks run
