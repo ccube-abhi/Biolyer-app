@@ -11,6 +11,8 @@
     <!-- Show progress of the run -->
     <arg value="ps" />
 
+    <arg name="warning-severity" value="1"/>
+
     <!-- Code directory -->
     <file>app/</file>
     
