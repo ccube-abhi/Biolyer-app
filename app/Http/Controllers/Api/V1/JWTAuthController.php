@@ -7,16 +7,12 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Services\BlogService;
 use App\Services\JWTAuthService;
-use App\Traits\ApiResponse;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class JWTAuthController extends Controller
 {
-    // Traits
-    use ApiResponse;
-
     protected $authService;
 
     protected $blogService;
